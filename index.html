@@ -4,10 +4,327 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tardigrada | Official Website</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" type="image/png" href="assets/logo.png">
+  <meta name="description" content="Tardigrada Official Website — discover the latest music releases, tour dates, and exclusive merch. Listen now on Spotify." />
+  <link rel="icon" href="assets/logodomain.svg" type="image/svg+xml">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+
+    /* ===== THEME COLORS ===== */
+    body.light {
+      background-color: #f9f9f9;
+      color: #111;
+    }
+
+    body.dark {
+      background-color: #0a0a0a;
+      color: #fff;
+    }
+
+    body.light .header {
+      background: rgba(255, 255, 255, 0.85);
+    }
+
+    body.dark .header {
+      background: rgba(0, 0, 0, 0.85);
+    }
+
+    body.light .footer {
+      background: #eee;
+      color: #555;
+    }
+
+    body.dark .footer {
+      background: #111;
+      color: #888;
+    }
+
+    /* HEADER */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      backdrop-filter: blur(5px);
+      transition: background 0.4s ease;
+    }
+
+    .logo {
+      font-size: 1.5em;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav a:hover {
+      color: #ff3d00;
+    }
+
+    /* === AUTHENTIC CUSTOM THEME TOGGLE ICON === */
+    .theme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: inherit;
+    }
+
+    /* === CUSTOM AUTHENTIC ICON EFFECT WITH GLOW === */
+    .theme-toggle svg {
+      transition: transform 0.6s ease, color 0.4s ease, stroke 0.4s ease, filter 0.5s ease;
+      filter: drop-shadow(0 0 0 transparent);
+    }
+
+    body.light .theme-toggle svg {
+      color: #ff3d00;
+      stroke: #ff3d00;
+      transform: rotate(0deg) scale(1);
+      filter: drop-shadow(0 0 2px rgba(255, 61, 0, 0.3));
+    }
+
+    body.dark .theme-toggle svg {
+      color: #ffa500;
+      stroke: #ffa500;
+      transform: rotate(180deg) scale(1.05);
+      filter: drop-shadow(0 0 6px rgba(255, 165, 0, 0.8)) drop-shadow(0 0 12px rgba(255, 165, 0, 0.4));
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      height: 100vh;
+      background: #000 url("assets/background.jpg") center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #ff3d00;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: #ff5722;
+    }
+
+    /* SECTIONS */
+    .section {
+      padding: 100px 60px;
+      text-align: center;
+      transition: color 0.3s, background-color 0.3s;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      margin-bottom: 40px;
+    }
+
+    /* MUSIC */
+    .music .release {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .release img {
+      width: 300px;
+      border-radius: 8px;
+    }
+
+    .release-info {
+      max-width: 400px;
+    }
+
+    /* TOUR */
+    .tour-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .tour-item {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    .tour-item span {
+      font-weight: 700;
+      color: #ff3d00;
+    }
+
+    /* MERCH */
+    .merch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+    }
+
+    .merch-item img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .merch-item h4 {
+      margin-top: 10px;
+      font-size: 1.1rem;
+    }
+
+    .merch-item p {
+      opacity: 0.8;
+    }
+
+    /* CONTACT */
+    .contact a {
+      color: #ff3d00;
+      text-decoration: none;
+    }
+
+    .contact a:hover {
+      text-decoration: underline;
+    }
+
+    /* FOOTER */
+    .footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* ANIMATION */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        padding: 15px 25px;
+      }
+      .nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+      }
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      .section {
+        padding: 80px 25px;
+      }
+    }
+
+    /* AUDIO PLAYER */
+    .audio-player {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .play-btn {
+      background: #ff3d00;
+      color: #fff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .play-btn:hover {
+      background: #ff5722;
+    }
+
+    #seekBar {
+      width: 200px;
+      accent-color: #ff3d00;
+    }
+
+    #time {
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+  </style>
 </head>
-<body>
+
+<body class="dark">
   <!-- HEADER -->
   <header class="header">
     <div class="logo">TARDIGRADA</div>
@@ -16,34 +333,51 @@
       <a href="#tour">Tour</a>
       <a href="#merch">Merch</a>
       <a href="#contact">Contact</a>
+
+      <!-- === NEW CUSTOM TOGGLE ICON === -->
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+        <svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="32" cy="32" r="16" stroke-opacity="0.9" />
+          <circle cx="32" cy="32" r="5" fill="currentColor" />
+          <path d="M16 32a16 16 0 0 1 32 0" stroke-linecap="round" />
+          <path d="M32 16a16 16 0 0 0 0 32" stroke-linecap="round" />
+        </svg>
+      </button>
     </nav>
   </header>
 
   <!-- HERO SECTION -->
   <section class="hero">
     <div class="overlay"></div>
-    <div class="hero-content">
+    <div class="hero-content fade-in">
       <h1>Tardigrada Official</h1>
       <p>Rilis Terbaru</p>
-      <a href="https://open.spotify.com/artist/2xrDfX61JsZIsFn2LxW5Ek" class="btn">Listen on Spotify</a>
+      <a href="https://open.spotify.com/artist/2xrDfX61JsZIsFn2LxW5Ek" target="_blank" rel="noopener noreferrer" class="btn">Listen on Spotify</a>
     </div>
   </section>
 
   <!-- MUSIC SECTION -->
-  <section id="music" class="section music">
+  <section id="music" class="section music fade-in">
     <h2>Music</h2>
     <div class="release">
-      <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&q=80" alt="Album Cover" />
+      <img src="assets/artworkdoadankesuburan.jpg" alt="Cover album Doa dan Kesuburan oleh Tardigrada" loading="lazy" />
       <div class="release-info">
-        <h3>Echoes in Microverse</h3>
+        <h3>Doa dan Kesuburan</h3>
         <p>Single • 2025</p>
-        <a href="https://open.spotify.com/" class="btn">Play</a>
+
+        <!-- Custom Audio Player -->
+        <div class="audio-player">
+          <audio id="player" src="assets/doadankesuburan.mp3"></audio>
+          <button id="playBtn" class="play-btn">▶️ Play</button>
+          <input type="range" id="seekBar" value="0" max="100">
+          <span id="time">0:00</span>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- TOUR SECTION -->
-  <section id="tour" class="section tour">
+  <section id="tour" class="section tour fade-in">
     <h2>Tour Dates</h2>
     <div class="tour-list">
       <div class="tour-item"><span>23 November 2025</span> — Palu, ID — Tanggabanggo</div>
@@ -51,21 +385,21 @@
   </section>
 
   <!-- MERCH SECTION -->
-  <section id="merch" class="section merch">
+  <section id="merch" class="section merch fade-in">
     <h2>Merch</h2>
     <div class="merch-grid">
       <div class="merch-item">
-        <img src="https://picsum.photos/seed/tee/400/400" alt="Tee" />
+        <img src="https://picsum.photos/seed/tee/400/400" alt="Kaos logo Tardigrada" loading="lazy" />
         <h4>Logo Tee</h4>
         <p>Rp 180.000</p>
       </div>
       <div class="merch-item">
-        <img src="https://picsum.photos/seed/patch/400/400" alt="Patch" />
+        <img src="https://picsum.photos/seed/patch/400/400" alt="Patch Microverse Tardigrada" loading="lazy" />
         <h4>Microverse Patch</h4>
         <p>Rp 45.000</p>
       </div>
       <div class="merch-item">
-        <img src="https://picsum.photos/seed/sticker/400/400" alt="Sticker Pack" />
+        <img src="https://picsum.photos/seed/sticker/400/400" alt="Paket stiker Tardigrada" loading="lazy" />
         <h4>Sticker Pack</h4>
         <p>Rp 30.000</p>
       </div>
@@ -73,7 +407,7 @@
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="section contact">
+  <section id="contact" class="section contact fade-in">
     <h2>Contact</h2>
     <p><a href="mailto:tardigradamusic@gmail.com">tardigradamusic@gmail.com</a></p>
   </section>
@@ -83,6 +417,73 @@
     <p>© 2025 Tardigrada. All rights reserved.</p>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- SCRIPT -->
+  <script>
+    // Smooth scroll with header offset
+    document.querySelectorAll('.nav a').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        const headerHeight = document.querySelector('.header').offsetHeight;
+        window.scrollTo({
+          top: target.offsetTop - headerHeight,
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Fade-in on scroll
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const reveal = () => {
+      fadeEls.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) el.classList.add('visible');
+      });
+    };
+    window.addEventListener('scroll', reveal);
+    reveal();
+
+    // Theme toggle logic
+    const toggleBtn = document.getElementById('themeToggle');
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    document.body.classList.add(currentTheme);
+
+    toggleBtn.addEventListener('click', () => {
+      const isDark = document.body.classList.contains('dark');
+      document.body.classList.toggle('dark', !isDark);
+      document.body.classList.toggle('light', isDark);
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    });
+
+    // === AUDIO PLAYER ===
+    const player = document.getElementById('player');
+    const playBtn = document.getElementById('playBtn');
+    const seekBar = document.getElementById('seekBar');
+    const time = document.getElementById('time');
+    let isPlaying = false;
+
+    playBtn.addEventListener('click', () => {
+      if (isPlaying) {
+        player.pause();
+        playBtn.textContent = '▶️ Play';
+      } else {
+        player.play();
+        playBtn.textContent = '⏸️ Pause';
+      }
+      isPlaying = !isPlaying;
+    });
+
+    player.addEventListener('timeupdate', () => {
+      const progress = (player.currentTime / player.duration) * 100;
+      seekBar.value = progress || 0;
+      const mins = Math.floor(player.currentTime / 60);
+      const secs = Math.floor(player.currentTime % 60).toString().padStart(2, '0');
+      time.textContent = `${mins}:${secs}`;
+    });
+
+    seekBar.addEventListener('input', () => {
+      player.currentTime = (seekBar.value / 100) * player.duration;
+    });
+  </script>
 </body>
 </html>
