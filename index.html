@@ -215,19 +215,19 @@
       font-weight: 700;
       color: #ff3d00;
     }
-
-    /* MERCH */
+    .tour-item.past {
+      text-decoration: line-through;
+      opacity: 0.5;
+    }
     .merch-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 30px;
     }
-
     .merch-item img {
       width: 100%;
       border-radius: 8px;
     }
-
     .merch-item h4 {
       margin-top: 10px;
       font-size: 1.1rem;
@@ -408,8 +408,12 @@
   <section id="tour" class="section tour fade-in">
     <h2>Tour Dates</h2>
     <div class="tour-list">
-      <div class="tour-item"><span>30 Oktober 2025</span> — Palu, ID — Posalia KampuLere</div>
-      <div class="tour-item"><span>23 November 2025</span> — Palu, ID — Tanggabanggo</div>
+      <div class="tour-item" data-date="2025-10-30">
+        <span>30 Oktober 2025</span> — Palu, ID — Posalia KampuLere
+      </div>
+      <div class="tour-item" data-date="2025-11-23">
+        <span>23 November 2025</span> — Palu, ID — Tanggabanggo
+      </div>
     </div>
   </section>
 
@@ -551,6 +555,17 @@
         player.volume = lastVolume;
         volumeBar.value = lastVolume * 100;
         volumeIcon.className = lastVolume < 0.5 ? "fas fa-volume-down" : "fas fa-volume-up";
+      }
+    });
+    document.querySelectorAll('.tour-item').forEach(item => {
+      const dateStr = item.getAttribute('data-date');
+      if (!dateStr) return;
+    
+      const eventDate = new Date(dateStr + "T23:59:59"); 
+      const today = new Date();
+    
+      if (eventDate < today) {
+        item.classList.add('past');
       }
     });
   </script>
