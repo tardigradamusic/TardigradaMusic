@@ -10,50 +10,20 @@
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * {margin: 0;padding: 0;box-sizing: border-box;}
     body {
       font-family: 'Montserrat', sans-serif;
       line-height: 1.6;
       scroll-behavior: smooth;
       transition: background-color 0.4s ease, color 0.4s ease;
     }
-
-    /* ===== THEME COLORS ===== */
-    body.light {
-      background-color: #f9f9f9;
-      color: #111;
-    }
-
-    body.dark {
-      background-color: #0a0a0a;
-      color: #fff;
-    }
-
-    body.light .header {
-      background: rgba(255, 255, 255, 0.85);
-    }
-
-    body.dark .header {
-      background: rgba(0, 0, 0, 0.85);
-    }
-
-    body.light .footer {
-      background: #eee;
-      color: #555;
-    }
-
-    body.dark .footer {
-      background: #111;
-      color: #888;
-    }
-
-    /* HEADER */
+    body.light {background-color: #f9f9f9; color: #111;}
+    body.dark {background-color: #0a0a0a; color: #fff;}
+    body.light .header {background: rgba(255, 255, 255, 0.85);}
+    body.dark .header {background: rgba(0, 0, 0, 0.85);}
+    body.light .footer {background: #eee; color: #555;}
+    body.dark .footer {background: #111; color: #888;}
+    
     .header {
       display: flex;
       justify-content: space-between;
@@ -67,29 +37,11 @@
       transition: background 0.4s ease;
     }
 
-    .logo {
-      font-size: 1.5em;
-      font-weight: 700;
-      letter-spacing: 2px;
-    }
+    .logo {font-size: 1.5em; font-weight: 700; letter-spacing: 2px;}
+    .nav {display: flex; align-items: center; gap: 20px;}
+    .nav a {color: inherit; text-decoration: none; transition: color 0.3s;}
+    .nav a:hover {color: #ff3d00;}
 
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .nav a {
-      color: inherit;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .nav a:hover {
-      color: #ff3d00;
-    }
-
-    /* === AUTHENTIC CUSTOM THEME TOGGLE ICON === */
     .theme-toggle {
       background: none;
       border: none;
@@ -100,7 +52,6 @@
       color: inherit;
     }
 
-    /* === CUSTOM AUTHENTIC ICON EFFECT WITH GLOW === */
     .theme-toggle svg {
       transition: transform 0.6s ease, color 0.4s ease, stroke 0.4s ease, filter 0.5s ease;
       filter: drop-shadow(0 0 0 transparent);
@@ -120,7 +71,6 @@
       filter: drop-shadow(0 0 6px rgba(255, 165, 0, 0.8)) drop-shadow(0 0 12px rgba(255, 165, 0, 0.4));
     }
 
-    /* HERO */
     .hero {
       position: relative;
       height: 100vh;
@@ -143,15 +93,8 @@
       z-index: 1;
     }
 
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-    }
+    .hero h1 {font-size: 3rem; margin-bottom: 10px;}
+    .hero p {font-size: 1.2rem; margin-bottom: 20px;}
 
     .btn {
       display: inline-block;
@@ -167,7 +110,6 @@
       background: #ff5722;
     }
 
-    /* SECTIONS */
     .section {
       padding: 100px 60px;
       text-align: center;
@@ -179,12 +121,19 @@
       margin-bottom: 40px;
     }
 
-    /* MUSIC */
-    .music .release {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 18px;
+    .music-card {
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:16px;
+    }
+    
+    .music-cover {
+      width:150px;
+      height:150px;
+      border-radius:16px;
+      object-fit:cover;
+      box-shadow:0 4px 20px rgba(0,0,0,0.25);
     }
 
     .release img {
