@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tardigrada | Official Website</title>
   <meta name="description" content="Tardigrada Official Website — discover the latest music releases, tour dates, and exclusive merch. Listen now on Spotify." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="icon" href="assets/logodomain.svg" type="image/svg+xml">
 
   <style>
@@ -298,18 +299,16 @@
     }
 
     .play-btn {
-      background: #ff3d00;
-      color: #fff;
+      background: none;
       border: none;
-      padding: 10px 18px;
-      border-radius: 4px;
-      font-size: 1rem;
+      color: #ff3d00;
+      font-size: 2.2rem;
       cursor: pointer;
-      transition: background 0.3s;
+      padding: 0;
     }
 
     .play-btn:hover {
-      background: #ff5722;
+      color: #ff5722;
     }
 
     #seekBar {
@@ -368,7 +367,7 @@
         <!-- Custom Audio Player -->
         <div class="audio-player">
           <audio id="player" src="assets/doadankesuburan.mp3"></audio>
-          <button id="playBtn" class="play-btn">▶️ Play</button>
+          <button id="playBtn" class="play-btn"><i id="playIcon" class="fas fa-play"></i></button>
           <input type="range" id="seekBar" value="0" max="100">
           <span id="time">0:00</span>
         </div>
@@ -463,10 +462,10 @@
     playBtn.addEventListener('click', () => {
       if (isPlaying) {
         player.pause();
-        playBtn.textContent = '▶️ Play';
+        playIcon.className = "fas fa-play";
       } else {
         player.play();
-        playBtn.textContent = '⏸️ Pause';
+        playIcon.className = "fas fa-pause";
       }
       isPlaying = !isPlaying;
     });
