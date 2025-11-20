@@ -1,543 +1,438 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tardigrada | Official Website</title>
-  <meta name="description" content="Tardigrada Official Website — discover the latest music releases, tour dates, and exclusive merch. Listen now on Spotify." />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tardigrada — Official</title>
+  <meta name="description" content="Tardigrada Official — music, tour, merch." />
   <link rel="icon" href="assets/logodomain.svg" type="image/svg+xml">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-    * {margin: 0;padding: 0;box-sizing: border-box;}
-    body {
-      font-family: 'Montserrat', sans-serif;
-      line-height: 1.6;
-      scroll-behavior: smooth;
-      transition: background-color 0.4s ease, color 0.4s ease;
-    }
-    body.light {background-color: #f9f9f9; color: #111;}
-    body.dark {background-color: #0a0a0a; color: #fff;}
-    body.light .header {background: rgba(255, 255, 255, 0.85);}
-    body.dark .header {background: rgba(0, 0, 0, 0.85);}
-    body.light .footer {background: #eee; color: #555;}
-    body.dark .footer {background: #111; color: #888;}
-    
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 60px;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-      backdrop-filter: blur(5px);
-      transition: background 0.4s ease;
-    }
+  /* ==========================
+     MOBILE-FIRST BASE
+     ========================== */
+  :root{
+    --bg:#0b0b0b;
+    --panel: rgba(255,255,255,0.03);
+    --accent:#ff3d00;
+    --muted: #9aa1a6;
+    --glass: rgba(255,255,255,0.04);
+    --radius: 14px;
+  }
+  html,body{height:100%;}
+  body{
+    margin:0;
+    font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    background:var(--bg);
+    color:#fff;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.45;
+  }
 
-    .logo {font-size: 1.5em; font-weight: 700; letter-spacing: 2px;}
-    .nav {display: flex; align-items: center; gap: 20px;}
-    .nav a {color: inherit; text-decoration: none; transition: color 0.3s;}
-    .nav a:hover {color: #ff3d00;}
+  /* HEADER / NAV (mobile-first: hamburger) */
+  .site-header{
+    position:fixed; inset:0 auto auto 0; top:0; left:0; right:0;
+    z-index:1200;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    padding:12px 16px;
+    backdrop-filter: blur(6px);
+    background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.15));
+  }
+  .brand { font-weight:700; letter-spacing:2px; font-size:1.05rem; margin-left:4px; }
+  .nav-toggle{
+    border:0; background:transparent; color:inherit; font-size:1.25rem;
+    display:flex; align-items:center; gap:8px; cursor:pointer;
+  }
 
-    .theme-toggle {
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: inherit;
-    }
+  .nav-drawer{
+    position:fixed; top:56px; right:12px; width:220px;
+    background:linear-gradient(180deg, rgba(10,10,10,0.95), rgba(10,10,10,0.90));
+    border-radius:12px; padding:10px; box-shadow:0 10px 30px rgba(0,0,0,0.6);
+    transform-origin: top right;
+    transform: scale(0.96); opacity:0; pointer-events:none; transition: 180ms ease;
+  }
+  .nav-drawer.open{ transform: scale(1); opacity:1; pointer-events:auto; }
+  .nav-drawer a{ display:block; padding:8px 10px; color:inherit; text-decoration:none; border-radius:8px; }
+  .nav-drawer a:hover{ background: rgba(255,255,255,0.02); color:var(--accent); }
 
-    .theme-toggle svg {
-      transition: transform 0.6s ease, color 0.4s ease, stroke 0.4s ease, filter 0.5s ease;
-      filter: drop-shadow(0 0 0 transparent);
-    }
+  /* HERO - premium cinematic */
+  .hero{
+    position:relative; height:58vh; min-height:420px; display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+    background: center/cover no-repeat url("assets/background.jpg");
+  }
+  .hero::after{ content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.6)); }
+  .hero-inner{ position:relative; z-index:2; text-align:center; padding:36px; max-width:1100px; width:100%; }
+  .hero h1{ font-size:clamp(1.6rem, 4.8vw, 3.4rem); margin:0 0 8px; font-weight:700; letter-spacing:0.6px; }
+  .hero p{ margin:0 0 18px; color:var(--muted); font-weight:300; }
+  .hero .cta{ display:inline-flex; gap:10px; align-items:center; padding:10px 18px; background:var(--accent); color:#fff; border-radius:10px; text-decoration:none; font-weight:600; box-shadow:0 8px 28px rgba(255,61,0,0.12); }
+  .hero .cta:hover{ transform:translateY(-2px); }
 
-    body.light .theme-toggle svg {
-      color: #ff3d00;
-      stroke: #ff3d00;
-      transform: rotate(0deg) scale(1);
-      filter: drop-shadow(0 0 2px rgba(255, 61, 0, 0.3));
-    }
+  /* MAIN LAYOUT */
+  main{ max-width:1100px; margin:0 auto; padding:24px 16px 80px; }
 
-    body.dark .theme-toggle svg {
-      color: #ffa500;
-      stroke: #ffa500;
-      transform: rotate(180deg) scale(1.05);
-      filter: drop-shadow(0 0 6px rgba(255, 165, 0, 0.8)) drop-shadow(0 0 12px rgba(255, 165, 0, 0.4));
-    }
+  /* MUSIC CARD (modern) */
+  .music-wrap{ display:flex; gap:18px; align-items:center; justify-content:center; padding:18px; }
+  .music-card{
+    width:100%;
+    max-width:720px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius: var(--radius);
+    padding:16px;
+    display:flex; gap:14px; align-items:center; box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    overflow:hidden;
+  }
+  .cover{
+    flex:0 0 118px;
+    width:118px; height:118px; border-radius:12px;
+    background: #222; object-fit:cover;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.6);
+  }
+  .track-info{ flex:1; min-width:0; }
+  .track-title{ font-weight:700; font-size:1.05rem; margin-bottom:6px; }
+  .track-sub{ color:var(--muted); font-size:0.92rem; margin-bottom:10px; }
 
-    .hero {
-      position: relative;
-      height: 100vh;
-      background: #000 url("assets/background.jpg") center/cover no-repeat;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      overflow: hidden;
-    }
+  /* player controls */
+  .controls{ display:flex; gap:10px; align-items:center; width:100%; flex-wrap:wrap; }
+  .btn-play{
+    width:44px; height:44px; border-radius:12px; border:0; background:linear-gradient(180deg,var(--accent), #ff6a2b);
+    color:#fff; font-size:1.05rem; display:inline-flex; align-items:center; justify-content:center; cursor:pointer;
+    box-shadow: 0 8px 26px rgba(255,61,0,0.12);
+  }
+  .progress{
+    flex:1; display:flex; gap:8px; align-items:center;
+  }
+  .progress input[type="range"]{
+    -webkit-appearance:none; appearance:none; width:100%;
+    height:6px; border-radius:6px; background: rgba(255,255,255,0.06);
+    outline:none;
+  }
+  .progress input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance:none; width:12px; height:12px; border-radius:50%; background:#fff; box-shadow:0 3px 8px rgba(0,0,0,0.4);
+  }
+  .time{ color:var(--muted); font-size:0.9rem; min-width:44px; text-align:center; }
 
-    .hero .overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.6);
-    }
+  .volume-wrap{ display:flex; gap:8px; align-items:center; }
+  .volume-wrap i{ color:var(--accent); font-size:1.05rem; cursor:pointer; }
+  .volume-wrap input[type="range"]{ width:90px; }
 
-    .hero-content {
-      position: relative;
-      z-index: 1;
-    }
+  /* TOUR */
+  .tour { margin-top:28px; padding:12px; border-radius:12px; background:var(--panel); }
+  .tour h3{ margin:0 0 8px; font-size:1rem; font-weight:600; }
+  .tour-list{ display:flex; flex-direction:column; gap:8px; }
+  .tour-item{ padding:10px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; gap:12px; }
+  .tour-item span{ color:var(--accent); font-weight:700; }
 
-    .hero h1 {font-size: 3rem; margin-bottom: 10px;}
-    .hero p {font-size: 1.2rem; margin-bottom: 20px;}
+  .tour-item.past{ opacity:0.45; text-decoration:line-through; }
 
-    .btn {
-      display: inline-block;
-      background: #ff3d00;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 4px;
-      text-decoration: none;
-      transition: background 0.3s;
-    }
+  /* CONTACT & MERCH */
+  .grid-two{ display:grid; gap:14px; grid-template-columns:1fr; margin-top:18px; }
+  .card{ padding:12px; border-radius:12px; background:var(--glass); }
 
-    .btn:hover {
-      background: #ff5722;
-    }
+  /* FOOTER */
+  footer{ margin-top:36px; text-align:center; color:var(--muted); font-size:0.9rem; }
 
-    .section {
-      padding: 100px 60px;
-      text-align: center;
-      transition: color 0.3s, background-color 0.3s;
-    }
+  /* LARGER SCREENS - desktop */
+  @media(min-width:820px){
+    .nav-drawer{ display:none; }
+    .nav-inline{ display:flex; gap:20px; align-items:center; margin-left:12px; }
+    .nav-toggle{ display:none; }
+    .site-header{ padding:18px 36px; }
+    main{ padding:36px; }
+    .music-card{ padding:18px; }
+    .grid-two{ grid-template-columns: 1fr 320px; }
+  }
 
-    .section h2 {
-      font-size: 2rem;
-      margin-bottom: 40px;
-    }
-
-    .music-card {
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:16px;
-    }
-    
-    .music-cover {
-      width:150px;
-      height:150px;
-      border-radius:16px;
-      object-fit:cover;
-      box-shadow:0 4px 20px rgba(0,0,0,0.25);
-    }
-
-    .release img {
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 14px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-    .release-info {
-      text-align: center;
-    }
-    .release-info h3 {
-      font-size: 1.3rem;
-      margin-bottom: 5px;
-    }
-    .release-info p {
-      opacity: 0.8;
-      font-size: 0.95rem;
-    }
-    .tour-list {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .tour-item {
-      font-size: 1.1rem;
-      opacity: 0.9;
-    }
-
-    .tour-item span {
-      font-weight: 700;
-      color: #ff3d00;
-    }
-    .tour-item.past {
-      text-decoration: line-through;
-      opacity: 0.5;
-    }
-    .merch-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 30px;
-    }
-    .merch-item img {
-      width: 100%;
-      border-radius: 8px;
-    }
-    .merch-item h4 {
-      margin-top: 10px;
-      font-size: 1.1rem;
-    }
-
-    .merch-item p {
-      opacity: 0.8;
-    }
-
-    /* CONTACT */
-    .contact a {
-      color: #ff3d00;
-      text-decoration: none;
-    }
-
-    .contact a:hover {
-      text-decoration: underline;
-    }
-
-    /* FOOTER */
-    .footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-      transition: background 0.3s, color 0.3s;
-    }
-
-    /* ANIMATION */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .header {
-        flex-direction: column;
-        padding: 15px 25px;
-      }
-      .nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-      }
-      .hero h1 {
-        font-size: 2.2rem;
-      }
-      .hero p {
-        font-size: 1rem;
-      }
-      .section {
-        padding: 80px 25px;
-      }
-    }
-
-    /* AUDIO PLAYER */
-    .audio-player {
-      margin-top: 12px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: nowrap;
-    }
-    
-    .play-btn {
-      background: none;
-      border: none;
-      color: #ff3d00;
-      font-size: 2rem;
-      cursor: pointer;
-      padding: 0;
-    }
-    #seekBar {
-      width: 160px;
-    }
-
-    #time {
-      font-size: 0.85rem;
-      color: #aaa;
-    }
-    #volumeBar {
-      width: 70px;
-    }
-    
-    #volumeIcon {
-      font-size: 1.3rem;
-      cursor: pointer;
-      color: #ff3d00;
-    }
-    
-    #volumeIcon:hover {
-      color: #ff5722;
-    }
-    .contact a i {
-      margin-right: 8px;
-      color: #ff3d00; /* warna ikon */
-      font-size: 1.2rem;
-    }
-    
-    .contact a {
-      font-size: 1.1rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-    body.dark .release img {
-      box-shadow: 0 4px 20px rgba(255,255,255,0.06);
-    }
-    
-    body.light .release img {
-      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-    }
-
+  /* light theme tweaks */
+  .light body, body.light { background:#f6f6f6; color:#111; }
+  body.light .music-card{ background: rgba(0,0,0,0.03); }
   </style>
 </head>
-
 <body class="dark">
   <!-- HEADER -->
-  <header class="header">
-    <div class="logo">TARDIGRADA</div>
-    <nav class="nav">
+  <header class="site-header" role="banner">
+    <div style="display:flex; align-items:center;">
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+        <i class="fa fa-bars"></i>
+      </button>
+      <div class="brand" style="margin-left:8px;">TARDIGRADA</div>
+    </div>
+
+    <!-- desktop inline nav (hidden on small screens via CSS) -->
+    <nav class="nav-inline" aria-label="Primary navigation" style="display:none;">
       <a href="#music">Music</a>
       <a href="#tour">Tour</a>
       <a href="#merch">Merch</a>
       <a href="#contact">Contact</a>
-
-      <!-- === NEW CUSTOM TOGGLE ICON === -->
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
-        <svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="32" cy="32" r="16" stroke-opacity="0.9" />
-          <circle cx="32" cy="32" r="5" fill="currentColor" />
-          <path d="M16 32a16 16 0 0 1 32 0" stroke-linecap="round" />
-          <path d="M32 16a16 16 0 0 0 0 32" stroke-linecap="round" />
-        </svg>
-      </button>
     </nav>
+
+    <!-- small-screen drawer -->
+    <div class="nav-drawer" id="navDrawer" aria-hidden="true">
+      <a href="#music">Music</a>
+      <a href="#tour">Tour</a>
+      <a href="#merch">Merch</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <div style="display:flex; align-items:center; gap:10px;">
+      <button id="themeToggle" class="nav-toggle" aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button>
+    </div>
   </header>
 
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <div class="overlay"></div>
-    <div class="hero-content fade-in">
-      <h1>Tardigrada Official</h1>
-      <p>Rilis Terbaru</p>
-      <a href="https://open.spotify.com/artist/2xrDfX61JsZIsFn2LxW5Ek" target="_blank" rel="noopener noreferrer" class="btn">Listen on Spotify</a>
-    </div>
-  </section>
-
-  <!-- MUSIC SECTION -->
-  <section id="music" class="section music fade-in">
-    <h2>Music</h2>
-  
-    <div class="music-card">
-      <img src="assets/artworkdoadankesuburan.jpg" 
-           alt="Cover Doa dan Kesuburan" 
-           class="music-cover" />
-  
-      <h3>Doa dan Kesuburan</h3>
-      <p>Single • 2025</p>
-  
-      <div class="audio-player">
-        <audio id="player" src="assets/doadankesuburan.mp3"></audio>
-  
-        <button id="playBtn" class="play-btn">
-          <i id="playIcon" class="fa-solid fa-play"></i>
-        </button>
-  
-        <input type="range" id="seekBar" value="0" max="100">
-  
-        <span id="time">0:00</span>
-  
-        <i id="volumeIcon" class="fa-solid fa-volume-up" 
-           style="font-size: 1.4rem; cursor: pointer;"></i>
-  
-        <input type="range" id="volumeBar" min="0" max="100" value="100" class="volume-bar">
-      </div>
-    </div>
-  </section>
-  
-
-  <!-- TOUR SECTION -->
-  <section id="tour" class="section tour fade-in">
-    <h2>Tour Dates</h2>
-    <div class="tour-list">
-      <div class="tour-item" data-date="2025-10-30">
-        <span>30 Oktober 2025</span> — Palu, ID — Posalia KampuLere
-      </div>
-      <div class="tour-item" data-date="2025-11-23">
-        <span>23 November 2025</span> — Palu, ID — Tanggabanggo
+  <!-- HERO -->
+  <section class="hero" role="region" aria-label="Intro">
+    <div class="hero-inner">
+      <div class="hero-inner content" style="text-align:center;">
+        <div class="hero-content fade-in">
+          <h1>Tardigrada</h1>
+          <p>Fusion of Tanah Kaili tradition and modern electronic elements</p>
+          <a class="cta" href="https://open.spotify.com/artist/2xrDfX61JsZIsFn2LxW5Ek" target="_blank" rel="noopener">Listen on Spotify</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- MERCH SECTION -->
-  <section id="merch" class="section merch fade-in">
-    <h2>Merch</h2>
-    <div class="merch-grid">
-      <div class="merch-item">
-        <img src="" alt="Tshirt Official" loading="lazy" />
-        <h4>T-Shirt</h4>
-        <p>Rp -</p>
+  <!-- MAIN -->
+  <main>
+    <!-- MUSIC (modern card) -->
+    <section id="music" class="music-wrap fade-in" aria-labelledby="music-title">
+      <div class="music-card" role="group" aria-label="Music player">
+        <img class="cover" src="assets/artworkdoadankesuburan.jpg" alt="Doa dan Kesuburan cover" />
+
+        <div class="track-info">
+          <div class="track-title">Doa dan Kesuburan</div>
+          <div class="track-sub">Single • 2025 — Tardigrada</div>
+
+          <div class="controls">
+            <button class="btn-play" id="playBtn" aria-label="Play/Pause">
+              <i id="playIcon" class="fa-solid fa-play"></i>
+            </button>
+
+            <div class="progress">
+              <input id="seekBar" type="range" min="0" max="100" value="0" aria-label="Seek" />
+            </div>
+
+            <div class="time" id="time">0:00</div>
+
+            <div class="volume-wrap" title="Volume">
+              <i id="volumeIcon" class="fa-solid fa-volume-high" aria-hidden="true"></i>
+              <input id="volumeBar" type="range" min="0" max="100" value="100" aria-label="Volume" />
+            </div>
+          </div>
+        </div>
+
+        <!-- hidden audio element -->
+        <audio id="player" src="assets/doadankesuburan.mp3" preload="metadata"></audio>
       </div>
-      <div class="merch-item">
-        <img src="" alt="Sticker Pack Tardigrada" loading="lazy" />
-        <h4>Sticker Pack</h4>
-        <p>Rp -</p>
+
+      <!-- Tour & Merch column on desktop -->
+      <div style="width:100%; max-width:720px; margin-top:12px;">
+        <div class="grid-two">
+          <div class="card tour">
+            <h3>Upcoming / Recent Shows</h3>
+            <div class="tour-list" id="tourList">
+              <div class="tour-item" data-date="2025-10-30">
+                <div><span>30 Okt 2025</span> &mdash; Palu, ID</div>
+                <div>Posalia KampuLere</div>
+              </div>
+              <div class="tour-item" data-date="2025-11-23">
+                <div><span>23 Nov 2025</span> &mdash; Palu, ID</div>
+                <div>Tanggabanggo</div>
+              </div>
+              <div class="tour-item" data-date="2024-12-01">
+                <div><span>01 Des 2024</span> &mdash; Makassar</div>
+                <div>Venue X</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Merch</h3>
+            <div style="display:flex; gap:10px; align-items:center;">
+              <img src="" alt="T-shirt" style="width:86px;height:86px;border-radius:10px;background:#222" />
+              <div>
+                <div style="font-weight:700">Official T-Shirt</div>
+                <div style="color:var(--muted); margin-top:6px">Rp -</div>
+              </div>
+            </div>
+            <div style="margin-top:12px">
+              <a href="#contact" style="color:var(--accent); text-decoration:none; font-weight:600">Contact to order</a>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="section contact fade-in">
-    <h2>Contact</h2>
-    <p>
-      <a href="mailto:tardigradamusic@gmail.com">
-        <i class="fa-solid fa-envelope"></i> tardigradamusik@gmail.com
-      </a>
-    </p>
-    <p>
-      <a href="https://www.instagram.com/tardigradaofficial/" target="_blank">
-        <i class="fa-brands fa-instagram"></i> @tardigradaofficial
-      </a>
-    </p>
-  </section>
+    <!-- CONTACT (compact) -->
+    <section id="contact" class="card" style="margin-top:20px;">
+      <h3>Contact</h3>
+      <div style="display:flex; gap:12px; flex-direction:column; margin-top:10px;">
+        <a href="mailto:tardigradamusik@gmail.com"><i class="fa-solid fa-envelope"></i> tardigradamusik@gmail.com</a>
+        <a href="https://www.instagram.com/tardigradaofficial/" target="_blank"><i class="fa-brands fa-instagram"></i> @tardigradaofficial</a>
+      </div>
+    </section>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <p>© 2025 Tardigrada. All rights reserved.</p>
-  </footer>
+    <footer>
+      © 2025 Tardigrada — All rights reserved.
+    </footer>
+  </main>
 
-<script>
-  /* ================================
-      NAVIGATION: SMOOTH SCROLL
-  ================================= */
-  document.querySelectorAll('.nav a').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      const target = document.querySelector(link.getAttribute('href'));
-      const headerHeight = document.querySelector('.header').offsetHeight;
+  <!-- SCRIPTS (clean & modular) -->
+  <script>
+  (function(){
+    /* ---------- Utility ---------- */
+    const $ = sel => document.querySelector(sel);
+    const $$ = sel => Array.from(document.querySelectorAll(sel));
 
-      window.scrollTo({
-        top: target.offsetTop - headerHeight,
-        behavior: 'smooth'
+    /* ---------- NAV (drawer) ---------- */
+    const navToggle = $('#navToggle');
+    const navDrawer = $('#navDrawer');
+    navToggle && navToggle.addEventListener('click', () => {
+      const open = navDrawer.classList.toggle('open');
+      navDrawer.setAttribute('aria-hidden', String(!open));
+    });
+    // Close drawer when clicking links
+    navDrawer && navDrawer.addEventListener('click', e => {
+      if(e.target.tagName === 'A') navDrawer.classList.remove('open');
+    });
+
+    /* ---------- Smooth scroll with header offset ---------- */
+    const headerHeight = () => document.querySelector('.site-header').offsetHeight || 56;
+    $$('.nav-drawer a, .nav-inline a, a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (ev) => {
+        const href = a.getAttribute('href');
+        if (!href || !href.startsWith('#')) return;
+        ev.preventDefault();
+        const t = document.querySelector(href);
+        if (!t) return;
+        const top = t.getBoundingClientRect().top + window.scrollY - headerHeight();
+        window.scrollTo({ top, behavior: 'smooth' });
       });
     });
-  });
 
-  /* ================================
-      SCROLL ANIMATIONS: FADE-IN
-  ================================= */
-  const fadeEls = document.querySelectorAll('.fade-in');
-  const revealOnScroll = () => {
-    fadeEls.forEach(el => {
-      if (el.getBoundingClientRect().top < window.innerHeight - 100) {
-        el.classList.add('visible');
+    /* ---------- Fade-in on scroll ---------- */
+    const fadeEls = $$('.fade-in');
+    const reveal = () => {
+      const threshold = window.innerHeight - 120;
+      fadeEls.forEach(el => {
+        if (el.getBoundingClientRect().top < threshold) el.classList.add('visible');
+      });
+    };
+    window.addEventListener('scroll', reveal, { passive: true });
+    window.addEventListener('resize', reveal);
+    reveal();
+
+    /* ---------- THEME TOGGLE (persisted) ---------- */
+    const themeToggle = $('#themeToggle');
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    if (savedTheme === 'light') document.body.classList.add('light');
+    themeToggle && themeToggle.addEventListener('click', () => {
+      const isLight = document.body.classList.toggle('light');
+      document.body.classList.toggle('dark', !isLight);
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+
+    /* ---------- AUDIO PLAYER ---------- */
+    const player = $('#player');
+    const playBtn = $('#playBtn');
+    const playIcon = $('#playIcon');
+    const seekBar = $('#seekBar');
+    const timeEl = $('#time');
+    const volumeBar = $('#volumeBar');
+    const volumeIcon = $('#volumeIcon');
+
+    // Safety checks
+    if (player) {
+      // set default volume
+      player.volume = 1;
+      volumeBar.value = 100;
+
+      // play/pause handler
+      playBtn.addEventListener('click', () => {
+        if (player.paused) {
+          player.play();
+          playIcon.className = 'fa-solid fa-pause';
+        } else {
+          player.pause();
+          playIcon.className = 'fa-solid fa-play';
+        }
+      });
+
+      // update seek and time
+      player.addEventListener('timeupdate', () => {
+        if (!player.duration || isNaN(player.duration)) return;
+        const pct = (player.currentTime / player.duration) * 100;
+        seekBar.value = pct;
+        const m = Math.floor(player.currentTime / 60);
+        const s = String(Math.floor(player.currentTime % 60)).padStart(2,'0');
+        timeEl.textContent = `${m}:${s}`;
+      });
+
+      // set max on metadata loaded
+      player.addEventListener('loadedmetadata', () => {
+        // nothing needed since we use percent-based seek
+      });
+
+      // seek by percent
+      seekBar.addEventListener('input', () => {
+        if (!player.duration || isNaN(player.duration)) return;
+        const pct = Number(seekBar.value);
+        player.currentTime = (pct / 100) * player.duration;
+      });
+
+      // volume control + icon
+      const updateVolumeIcon = v => {
+        if (v <= 0) volumeIcon.className = 'fa-solid fa-volume-xmark';
+        else if (v < 0.5) volumeIcon.className = 'fa-solid fa-volume-low';
+        else volumeIcon.className = 'fa-solid fa-volume-high';
+      };
+
+      volumeBar.addEventListener('input', () => {
+        const vol = Number(volumeBar.value) / 100;
+        player.volume = vol;
+        updateVolumeIcon(vol);
+      });
+
+      // mute / unmute toggle
+      let lastVol = 1;
+      volumeIcon.addEventListener('click', () => {
+        if (player.volume > 0) {
+          lastVol = player.volume;
+          player.volume = 0;
+          volumeBar.value = 0;
+          updateVolumeIcon(0);
+        } else {
+          player.volume = lastVol || 1;
+          volumeBar.value = player.volume * 100;
+          updateVolumeIcon(player.volume);
+        }
+      });
+    }
+
+    /* ---------- TOUR: mark past events ---------- */
+    $$('.tour-item').forEach(item => {
+      const ds = item.dataset.date;
+      if (!ds) return;
+      const eventDate = new Date(ds + 'T23:59:59');
+      if (eventDate < new Date()) item.classList.add('past');
+    });
+
+    /* ---------- Improve accessibility: close nav on ESC ---------- */
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        navDrawer && navDrawer.classList.remove('open');
       }
     });
-  };
-  window.addEventListener('scroll', revealOnScroll);
-  revealOnScroll();
-
-  /* ================================
-      THEME TOGGLE (LIGHT / DARK)
-  ================================= */
-  const toggleBtn = document.getElementById('themeToggle');
-  const savedTheme = localStorage.getItem('theme') || 'dark';
-  document.body.className = savedTheme;
-
-  toggleBtn.addEventListener('click', () => {
-    const isDark = document.body.classList.contains('dark');
-    document.body.classList.toggle('dark', !isDark);
-    document.body.classList.toggle('light', isDark);
-    localStorage.setItem('theme', isDark ? 'light' : 'dark');
-  });
-
-  /* ================================
-      AUDIO PLAYER
-  ================================= */
-  const player      = document.getElementById('player');
-  const playBtn     = document.getElementById('playBtn');
-  const playIcon    = document.getElementById('playIcon');
-  const seekBar     = document.getElementById('seekBar');
-  const time        = document.getElementById('time');
-  const volumeBar   = document.getElementById('volumeBar');
-  const volumeIcon  = document.getElementById('volumeIcon');
-
-  let isPlaying = false;
-  let lastVolume = 1;
-  player.volume = 1;
-
-  // Play / Pause
-  playBtn.addEventListener('click', () => {
-    isPlaying ? player.pause() : player.play();
-    playIcon.className = isPlaying ? "fas fa-play" : "fas fa-pause";
-    isPlaying = !isPlaying;
-  });
-
-  // Seek bar + time update
-  player.addEventListener('timeupdate', () => {
-    if (!player.duration) return;
-
-    seekBar.value = (player.currentTime / player.duration) * 100;
-
-    const mins = Math.floor(player.currentTime / 60);
-    const secs = Math.floor(player.currentTime % 60).toString().padStart(2, '0');
-    time.textContent = `${mins}:${secs}`;
-  });
-
-  seekBar.addEventListener('input', () => {
-    player.currentTime = (seekBar.value / 100) * player.duration;
-  });
-
-  // Volume bar
-  const updateVolumeIcon = (v) => {
-    if (v === 0) return volumeIcon.className = "fas fa-volume-mute";
-    if (v < 0.5) return volumeIcon.className = "fas fa-volume-down";
-    return volumeIcon.className = "fas fa-volume-up";
-  };
-
-  volumeBar.addEventListener('input', () => {
-    player.volume = volumeBar.value / 100;
-    updateVolumeIcon(player.volume);
-  });
-
-  // Mute / Unmute
-  volumeIcon.addEventListener('click', () => {
-    if (player.volume > 0) {
-      lastVolume = player.volume;
-      player.volume = 0;
-      volumeBar.value = 0;
-      updateVolumeIcon(0);
-    } else {
-      player.volume = lastVolume;
-      volumeBar.value = lastVolume * 100;
-      updateVolumeIcon(lastVolume);
-    }
-  });
-
-  /* ================================
-      TOUR DATE AUTO-STRIKE IF PAST
-  ================================= */
-  document.querySelectorAll('.tour-item').forEach(item => {
-    const dateStr = item.getAttribute('data-date');
-    if (!dateStr) return;
-
-    const eventDate = new Date(`${dateStr}T23:59:59`);
-    if (eventDate < new Date()) item.classList.add('past');
-  });
-</script>
+  })();
+  </script>
 </body>
 </html>
