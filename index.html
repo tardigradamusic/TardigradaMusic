@@ -320,6 +320,17 @@
       font-size: 0.9rem;
       color: #aaa;
     }
+    #volumeBar {
+      accent-color: #ff3d00;
+    }
+    
+    #volumeIcon {
+      color: #ff3d00;
+    }
+    
+    #volumeIcon:hover {
+      color: #ff5722;
+    }
   </style>
 </head>
 
@@ -367,9 +378,13 @@
         <!-- Custom Audio Player -->
         <div class="audio-player">
           <audio id="player" src="assets/doadankesuburan.mp3"></audio>
-          <button id="playBtn" class="play-btn"><i id="playIcon" class="fas fa-play"></i></button>
+          <button id="playBtn" class="play-btn">
+            <i id="playIcon" class="fas fa-play"></i>
+          </button>
           <input type="range" id="seekBar" value="0" max="100">
           <span id="time">0:00</span>
+          <i class="fas fa-volume-up" id="volumeIcon" style="font-size: 1.5rem; cursor: pointer;"></i>
+          <input type="range" id="volumeBar" min="0" max="100" value="100" style="width: 120px;">
         </div>
       </div>
     </div>
@@ -443,7 +458,7 @@
     // Theme toggle logic
     const toggleBtn = document.getElementById('themeToggle');
     const currentTheme = localStorage.getItem('theme') || 'dark';
-    document.body.classList.add(currentTheme);
+    document.body.className = currentTheme;
 
     toggleBtn.addEventListener('click', () => {
       const isDark = document.body.classList.contains('dark');
@@ -455,6 +470,7 @@
     // === AUDIO PLAYER ===
     const player = document.getElementById('player');
     const playBtn = document.getElementById('playBtn');
+    const playIcon = document.getElementById('playIcon');
     const seekBar = document.getElementById('seekBar');
     const time = document.getElementById('time');
     let isPlaying = false;
@@ -471,6 +487,7 @@
     });
 
     player.addEventListener('timeupdate', () => {
+      if (isNaN(player.duration)) return;
       const progress = (player.currentTime / player.duration) * 100;
       seekBar.value = progress || 0;
       const mins = Math.floor(player.currentTime / 60);
@@ -480,6 +497,40 @@
 
     seekBar.addEventListener('input', () => {
       player.currentTime = (seekBar.value / 100) * player.duration;
+    });
+    // === VOLUME CONTROL ===
+    const volumeBar = document.getElementById("volumeBar");
+    const volumeIcon = document.getElementById("volumeIcon");
+    
+    // Set default volume 100%
+    player.volume = 1;
+    
+    volumeBar.addEventListener("input", () => {
+      player.volume = volumeBar.value / 100;
+    
+      // Update icon based on volume
+      if (player.volume === 0) {
+        volumeIcon.className = "fas fa-volume-mute";
+      } else if (player.volume < 0.5) {
+        volumeIcon.className = "fas fa-volume-down";
+      } else {
+        volumeIcon.className = "fas fa-volume-up";
+      }
+    });
+    
+    // Klik icon untuk mute/unmute
+    let lastVolume = 1;
+    volumeIcon.addEventListener("click", () => {
+      if (player.volume > 0) {
+        lastVolume = player.volume;
+        player.volume = 0;
+        volumeBar.value = 0;
+        volumeIcon.className = "fas fa-volume-mute";
+      } else {
+        player.volume = lastVolume;
+        volumeBar.value = lastVolume * 100;
+        volumeIcon.className = lastVolume < 0.5 ? "fas fa-volume-down" : "fas fa-volume-up";
+      }
     });
   </script>
 </body>
