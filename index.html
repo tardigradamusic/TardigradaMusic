@@ -420,120 +420,124 @@
     <p>© 2025 Tardigrada. All rights reserved.</p>
   </footer>
 
-  <!-- SCRIPT -->
-  <script>
-    // Smooth scroll with header offset
-    document.querySelectorAll('.nav a').forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        const target = document.querySelector(link.getAttribute('href'));
-        const headerHeight = document.querySelector('.header').offsetHeight;
-        window.scrollTo({
-          top: target.offsetTop - headerHeight,
-          behavior: 'smooth'
-        });
+<script>
+  /* ================================
+      NAVIGATION: SMOOTH SCROLL
+  ================================= */
+  document.querySelectorAll('.nav a').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      const headerHeight = document.querySelector('.header').offsetHeight;
+
+      window.scrollTo({
+        top: target.offsetTop - headerHeight,
+        behavior: 'smooth'
       });
     });
+  });
 
-    // Fade-in on scroll
-    const fadeEls = document.querySelectorAll('.fade-in');
-    const reveal = () => {
-      fadeEls.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) el.classList.add('visible');
-      });
-    };
-    window.addEventListener('scroll', reveal);
-    reveal();
-
-    // Theme toggle logic
-    const toggleBtn = document.getElementById('themeToggle');
-    const currentTheme = localStorage.getItem('theme') || 'dark';
-    document.body.className = currentTheme;
-
-    toggleBtn.addEventListener('click', () => {
-      const isDark = document.body.classList.contains('dark');
-      document.body.classList.toggle('dark', !isDark);
-      document.body.classList.toggle('light', isDark);
-      localStorage.setItem('theme', isDark ? 'light' : 'dark');
-    });
-
-    // === AUDIO PLAYER ===
-    const player = document.getElementById('player');
-    const playBtn = document.getElementById('playBtn');
-    const playIcon = document.getElementById('playIcon');
-    const seekBar = document.getElementById('seekBar');
-    const time = document.getElementById('time');
-    let isPlaying = false;
-
-    playBtn.addEventListener('click', () => {
-      if (isPlaying) {
-        player.pause();
-        playIcon.className = "fas fa-play";
-      } else {
-        player.play();
-        playIcon.className = "fas fa-pause";
-      }
-      isPlaying = !isPlaying;
-    });
-
-    player.addEventListener('timeupdate', () => {
-      if (isNaN(player.duration)) return;
-      const progress = (player.currentTime / player.duration) * 100;
-      seekBar.value = progress || 0;
-      const mins = Math.floor(player.currentTime / 60);
-      const secs = Math.floor(player.currentTime % 60).toString().padStart(2, '0');
-      time.textContent = `${mins}:${secs}`;
-    });
-
-    seekBar.addEventListener('input', () => {
-      player.currentTime = (seekBar.value / 100) * player.duration;
-    });
-    // === VOLUME CONTROL ===
-    const volumeBar = document.getElementById("volumeBar");
-    const volumeIcon = document.getElementById("volumeIcon");
-    
-    // Set default volume 100%
-    player.volume = 1;
-    
-    volumeBar.addEventListener("input", () => {
-      player.volume = volumeBar.value / 100;
-    
-      // Update icon based on volume
-      if (player.volume === 0) {
-        volumeIcon.className = "fas fa-volume-mute";
-      } else if (player.volume < 0.5) {
-        volumeIcon.className = "fas fa-volume-down";
-      } else {
-        volumeIcon.className = "fas fa-volume-up";
+  /* ================================
+      SCROLL ANIMATIONS: FADE-IN
+  ================================= */
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const revealOnScroll = () => {
+    fadeEls.forEach(el => {
+      if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+        el.classList.add('visible');
       }
     });
-    
-    // Klik icon untuk mute/unmute
-    let lastVolume = 1;
-    volumeIcon.addEventListener("click", () => {
-      if (player.volume > 0) {
-        lastVolume = player.volume;
-        player.volume = 0;
-        volumeBar.value = 0;
-        volumeIcon.className = "fas fa-volume-mute";
-      } else {
-        player.volume = lastVolume;
-        volumeBar.value = lastVolume * 100;
-        volumeIcon.className = lastVolume < 0.5 ? "fas fa-volume-down" : "fas fa-volume-up";
-      }
-    });
-    document.querySelectorAll('.tour-item').forEach(item => {
-      const dateStr = item.getAttribute('data-date');
-      if (!dateStr) return;
-    
-      const eventDate = new Date(dateStr + "T23:59:59"); 
-      const today = new Date();
-    
-      if (eventDate < today) {
-        item.classList.add('past');
-      }
-    });
-  </script>
+  };
+  window.addEventListener('scroll', revealOnScroll);
+  revealOnScroll();
+
+  /* ================================
+      THEME TOGGLE (LIGHT / DARK)
+  ================================= */
+  const toggleBtn = document.getElementById('themeToggle');
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  document.body.className = savedTheme;
+
+  toggleBtn.addEventListener('click', () => {
+    const isDark = document.body.classList.contains('dark');
+    document.body.classList.toggle('dark', !isDark);
+    document.body.classList.toggle('light', isDark);
+    localStorage.setItem('theme', isDark ? 'light' : 'dark');
+  });
+
+  /* ================================
+      AUDIO PLAYER
+  ================================= */
+  const player      = document.getElementById('player');
+  const playBtn     = document.getElementById('playBtn');
+  const playIcon    = document.getElementById('playIcon');
+  const seekBar     = document.getElementById('seekBar');
+  const time        = document.getElementById('time');
+  const volumeBar   = document.getElementById('volumeBar');
+  const volumeIcon  = document.getElementById('volumeIcon');
+
+  let isPlaying = false;
+  let lastVolume = 1;
+  player.volume = 1;
+
+  // Play / Pause
+  playBtn.addEventListener('click', () => {
+    isPlaying ? player.pause() : player.play();
+    playIcon.className = isPlaying ? "fas fa-play" : "fas fa-pause";
+    isPlaying = !isPlaying;
+  });
+
+  // Seek bar + time update
+  player.addEventListener('timeupdate', () => {
+    if (!player.duration) return;
+
+    seekBar.value = (player.currentTime / player.duration) * 100;
+
+    const mins = Math.floor(player.currentTime / 60);
+    const secs = Math.floor(player.currentTime % 60).toString().padStart(2, '0');
+    time.textContent = `${mins}:${secs}`;
+  });
+
+  seekBar.addEventListener('input', () => {
+    player.currentTime = (seekBar.value / 100) * player.duration;
+  });
+
+  // Volume bar
+  const updateVolumeIcon = (v) => {
+    if (v === 0) return volumeIcon.className = "fas fa-volume-mute";
+    if (v < 0.5) return volumeIcon.className = "fas fa-volume-down";
+    return volumeIcon.className = "fas fa-volume-up";
+  };
+
+  volumeBar.addEventListener('input', () => {
+    player.volume = volumeBar.value / 100;
+    updateVolumeIcon(player.volume);
+  });
+
+  // Mute / Unmute
+  volumeIcon.addEventListener('click', () => {
+    if (player.volume > 0) {
+      lastVolume = player.volume;
+      player.volume = 0;
+      volumeBar.value = 0;
+      updateVolumeIcon(0);
+    } else {
+      player.volume = lastVolume;
+      volumeBar.value = lastVolume * 100;
+      updateVolumeIcon(lastVolume);
+    }
+  });
+
+  /* ================================
+      TOUR DATE AUTO-STRIKE IF PAST
+  ================================= */
+  document.querySelectorAll('.tour-item').forEach(item => {
+    const dateStr = item.getAttribute('data-date');
+    if (!dateStr) return;
+
+    const eventDate = new Date(`${dateStr}T23:59:59`);
+    if (eventDate < new Date()) item.classList.add('past');
+  });
+</script>
 </body>
 </html>
