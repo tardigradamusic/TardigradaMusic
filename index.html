@@ -182,23 +182,29 @@
     /* MUSIC */
     .music .release {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      gap: 40px;
+      gap: 18px;
     }
 
     .release img {
-      width: 40%;
-      max-width: 200px;
-      border-radius: 8px;
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 14px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
-
     .release-info {
-      max-width: 400px;
+      text-align: center;
     }
-
-    /* TOUR */
+    .release-info h3 {
+      font-size: 1.3rem;
+      margin-bottom: 5px;
+    }
+    .release-info p {
+      opacity: 0.8;
+      font-size: 0.95rem;
+    }
     .tour-list {
       display: flex;
       flex-direction: column;
@@ -291,41 +297,37 @@
 
     /* AUDIO PLAYER */
     .audio-player {
-      margin-top: 20px;
+      margin-top: 12px;
       display: flex;
       align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
+      gap: 12px;
       justify-content: center;
+      flex-wrap: nowrap;
     }
-
+    
     .play-btn {
       background: none;
       border: none;
       color: #ff3d00;
-      font-size: 2.2rem;
+      font-size: 2rem;
       cursor: pointer;
       padding: 0;
     }
-
-    .play-btn:hover {
-      color: #ff5722;
-    }
-
     #seekBar {
-      width: 200px;
-      accent-color: #ff3d00;
+      width: 160px;
     }
 
     #time {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: #aaa;
     }
     #volumeBar {
-      accent-color: #ff3d00;
+      width: 70px;
     }
     
     #volumeIcon {
+      font-size: 1.3rem;
+      cursor: pointer;
       color: #ff3d00;
     }
     
@@ -343,6 +345,13 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
+    }
+    body.dark .release img {
+      box-shadow: 0 4px 20px rgba(255,255,255,0.06);
+    }
+    
+    body.light .release img {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
     }
 
   </style>
@@ -383,26 +392,34 @@
   <!-- MUSIC SECTION -->
   <section id="music" class="section music fade-in">
     <h2>Music</h2>
-    <div class="release">
-      <img src="assets/artworkdoadankesuburan.jpg" alt="Cover album Doa dan Kesuburan oleh Tardigrada" loading="lazy" />
-      <div class="release-info">
-        <h3>Doa dan Kesuburan</h3>
-        <p>Single • 2025</p>
-
-        <!-- Custom Audio Player -->
-        <div class="audio-player">
-          <audio id="player" src="assets/doadankesuburan.mp3"></audio>
-          <button id="playBtn" class="play-btn">
-            <i id="playIcon" class="fas fa-play"></i>
-          </button>
-          <input type="range" id="seekBar" value="0" max="100">
-          <span id="time">0:00</span>
-          <i class="fas fa-volume-up" id="volumeIcon" style="font-size: 1.5rem; cursor: pointer;"></i>
-          <input type="range" id="volumeBar" min="0" max="100" value="100" style="width: 120px;">
-        </div>
+  
+    <div class="music-card">
+      <img src="assets/artworkdoadankesuburan.jpg" 
+           alt="Cover Doa dan Kesuburan" 
+           class="music-cover" />
+  
+      <h3>Doa dan Kesuburan</h3>
+      <p>Single • 2025</p>
+  
+      <div class="audio-player">
+        <audio id="player" src="assets/doadankesuburan.mp3"></audio>
+  
+        <button id="playBtn" class="play-btn">
+          <i id="playIcon" class="fa-solid fa-play"></i>
+        </button>
+  
+        <input type="range" id="seekBar" value="0" max="100">
+  
+        <span id="time">0:00</span>
+  
+        <i id="volumeIcon" class="fa-solid fa-volume-up" 
+           style="font-size: 1.4rem; cursor: pointer;"></i>
+  
+        <input type="range" id="volumeBar" min="0" max="100" value="100" class="volume-bar">
       </div>
     </div>
   </section>
+  
 
   <!-- TOUR SECTION -->
   <section id="tour" class="section tour fade-in">
