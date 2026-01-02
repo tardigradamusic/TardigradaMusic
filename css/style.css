@@ -91,27 +91,13 @@
     box-shadow: 0 10px 30px rgba(0,0,0,0.6);
     transition: transform 420ms var(--ease);
   }
-  .music-card:hover .cover{ transform: translateY(-6px) scale(1.02); }
+  .artwork-link:hover .cover {
+    filter: blur(3px) brightness(0.6);
+    transform: translateY(-6px) scale(1.06);
+  }
   .meta{ flex:1; min-width:0; }
   .title{ font-weight:700; font-size:1.05rem; margin-bottom:6px; }
   .sub{ color:var(--muted); font-size:0.92rem; margin-bottom:12px; }
-
-  /* controls */
-  .controls{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
-  .btn-play{
-    width:48px; height:48px; border-radius:12px; border:0; background:linear-gradient(180deg,var(--accent), #ff6a2b);
-    color:#fff; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 10px 30px rgba(255,61,0,0.12);
-    transition: transform 160ms var(--ease);
-  }
-  .btn-play:hover{ transform:translateY(-3px) }
-  .seek{ flex:1; display:flex; gap:8px; align-items:center; min-width:140px; }
-  .seek input[type="range"]{ width:100%; height:6px; -webkit-appearance:none; background: rgba(255,255,255,0.06); border-radius:6px; outline:none;}
-  .seek input[type="range"]::-webkit-slider-thumb{ -webkit-appearance:none; width:12px; height:12px; background:#fff; border-radius:50%; box-shadow:0 4px 10px rgba(0,0,0,0.35); }
-  .time{ color:var(--muted); min-width:48px; text-align:center; font-size:0.9rem; }
-
-  .volume{ display:flex; gap:8px; align-items:center; }
-  .volume i{ color:var(--accent); cursor:pointer; }
-  .volume input[type="range"]{ width:84px; }
 
   /* tour & merch grid */
   .grid{ display:grid; gap:14px; grid-template-columns: 1fr; margin-top:18px; }
@@ -133,3 +119,72 @@
   /* light-mode tweaks */
   body.light{ background:#fbfbfb; color:#0b0b0b; }
   body.light .music-card{ background: rgba(0,0,0,0.03); }
+
+/* =========================
+   Artwork hover → platform
+   ========================= */
+
+.artwork-link {
+  position: relative;
+  flex: 0 0 120px;
+  border-radius: 12px;
+  overflow: hidden;
+  display: block;
+}
+
+/* gunakan cover existing */
+.artwork-link .cover {
+  transition:
+    filter 360ms var(--ease),
+    transform 420ms var(--ease);
+}
+
+/* overlay */
+.artwork-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity 300ms var(--ease);
+}
+
+/* icon */
+.artwork-overlay i {
+  font-size: 2rem;
+  color: #1db954; /* Spotify */
+}
+
+/* label */
+.artwork-overlay span {
+  font-size: 0.85rem;
+  letter-spacing: 0.4px;
+  color: #1db954;
+}
+
+/* hover effect */
+.artwork-link:hover .cover {
+  filter: blur(3px) brightness(0.6);
+  transform: scale(1.06);
+}
+
+.artwork-link:hover .artwork-overlay {
+  opacity: 1;
+}
+
+/* mobile usability */
+@media (hover: none) {
+  .artwork-overlay {
+    opacity: 1;
+    background: rgba(0,0,0,0.35);
+  }
+}
