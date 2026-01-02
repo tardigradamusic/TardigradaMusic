@@ -48,65 +48,6 @@
     window.addEventListener('resize', reveal);
     reveal();
 
-    /* AUDIO PLAYER (modern, safe checks) */
-    const player = $('#player');
-    const playBtn = $('#playBtn');
-    const playIcon = $('#playIcon');
-    const seekBar = $('#seekBar');
-    const timeEl = $('#time');
-    const volumeBar = $('#volumeBar');
-    const volumeIcon = $('#volumeIcon');
-
-    if (player && playBtn && seekBar && timeEl && volumeBar && volumeIcon) {
-      player.volume = 1;
-      volumeBar.value = 100;
-
-      // play/pause
-      playBtn.addEventListener('click', () => {
-        if (player.paused) { player.play(); playIcon.className = 'fa-solid fa-pause'; playBtn.setAttribute('aria-label','Pause'); }
-        else { player.pause(); playIcon.className = 'fa-solid fa-play'; playBtn.setAttribute('aria-label','Play'); }
-      });
-
-      // update time & seek
-      player.addEventListener('timeupdate', () => {
-        if (!player.duration || isNaN(player.duration)) return;
-        const pct = (player.currentTime / player.duration) * 100;
-        seekBar.value = pct;
-        const m = Math.floor(player.currentTime / 60);
-        const s = String(Math.floor(player.currentTime % 60)).padStart(2,'0');
-        timeEl.textContent = `${m}:${s}`;
-      });
-
-      seekBar.addEventListener('input', () => {
-        if (!player.duration || isNaN(player.duration)) return;
-        const pct = Number(seekBar.value);
-        player.currentTime = (pct / 100) * player.duration;
-      });
-
-      // volume
-      const updateVolumeIcon = (v) => {
-        if (v <= 0) volumeIcon.className = 'fa-solid fa-volume-xmark';
-        else if (v < 0.5) volumeIcon.className = 'fa-solid fa-volume-low';
-        else volumeIcon.className = 'fa-solid fa-volume-high';
-      };
-      volumeBar.addEventListener('input', () => {
-        const vol = Number(volumeBar.value) / 100;
-        player.volume = vol;
-        updateVolumeIcon(vol);
-      });
-
-      // mute toggle
-      let lastVol = 1;
-      volumeIcon.addEventListener('click', () => {
-        if (player.volume > 0) {
-          lastVol = player.volume;
-          player.volume = 0; volumeBar.value = 0; updateVolumeIcon(0);
-        } else {
-          player.volume = lastVol || 1; volumeBar.value = player.volume * 100; updateVolumeIcon(player.volume);
-        }
-      });
-    }
-
     /* Tour: mark past dates */
     $$('.tour-item').forEach(item => {
       const ds = item.dataset.date;
