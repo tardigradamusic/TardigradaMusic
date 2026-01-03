@@ -4,18 +4,30 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Tardigrada | Official</title>
+
   <meta name="description" content="Tardigrada — fusion of Tanah Kaili tradition and modern electronic elements. Music, tour & merch." />
+
   <link rel="icon" href="assets/bahanweb/logodomain.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body class="dark">
-  <!-- HEADER -->
+
+  <!-- ================= HEADER ================= -->
   <header class="header" role="banner">
-    <div style="display:flex; align-items:center; gap:12px;">
-      <button class="hamburger" id="navToggle" aria-label="Open menu"><i class="fa fa-bars" aria-hidden="true"></i></button>
+    <div class="header-left">
+      <button class="hamburger" id="navToggle" aria-label="Open menu">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </button>
+
       <div class="brand">TARDIGRADA</div>
+
       <nav class="nav-inline" aria-label="Primary navigation">
         <a href="#music">Music</a>
         <a href="#tour">Tour</a>
@@ -24,61 +36,87 @@
       </nav>
     </div>
 
-    <div style="display:flex; gap:12px; align-items:center;">
-      <button class="hamburger" id="themeBtn" aria-label="Toggle theme"><i class="fa-solid fa-moon" aria-hidden="true"></i></button>
+    <div class="header-right">
+      <button class="hamburger" id="themeBtn" aria-label="Toggle theme">
+        <i class="fa-solid fa-moon" aria-hidden="true"></i>
+      </button>
     </div>
 
-    <!-- mobile drawer -->
-    <div class="drawer" id="drawer" aria-hidden="true">
+    <!-- Mobile Drawer -->
+    <nav class="drawer" id="drawer" aria-hidden="true">
       <a href="#music">Music</a>
       <a href="#tour">Tour</a>
       <a href="#merch">Merch</a>
       <a href="#contact">Contact</a>
-    </div>
+    </nav>
   </header>
 
-  <!-- HERO -->
+  <!-- ================= HERO ================= -->
   <section class="hero" role="region" aria-label="Intro">
     <div class="hero-inner">
       <div class="hero-content">
         <h1>Tardigrada</h1>
-        <p>Fusion of Tanah Kaili tradition and modern electronic elements — cinematic, rooted, contemporary.</p>
-        <a class="cta" href="https://open.spotify.com/artist/2xrDfX61JsZIsFn2LxW5Ek" target="_blank" rel="noopener">Listen on Spotify</a>
+        <p>
+          Fusion of Tanah Kaili tradition and modern electronic elements —
+          cinematic, rooted, contemporary.
+        </p>
+        <a
+          class="cta"
+          href="https://open.spotify.com/artist/2xrDfX61JsZIsFn2LxW5Ek"
+          target="_blank"
+          rel="noopener"
+        >
+          Listen on Spotify
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- MAIN -->
+  <!-- ================= MAIN ================= -->
   <main>
-    <!-- MUSIC + side column -->
-    <section id="music" aria-labelledby="music-title">
+
+    <!-- MUSIC -->
+    <section id="music" class="section">
       <div class="music-card" role="group" aria-label="Music Release">
-        <img class="cover" src="assets/artwork/doadankesuburan.jpg" alt="Doa dan Kesuburan — cover" />
+        <img
+          class="cover"
+          src="assets/artwork/doadankesuburan.jpg"
+          alt="Doa dan Kesuburan — cover"
+        />
 
         <div class="meta">
           <div class="title">Doa dan Kesuburan</div>
           <div class="sub">Single • 2025 — Tardigrada</div>
-          <a href="https://open.spotify.com/track/44Gn43S8pdWlPgjJVMZsGY?si=b571e0bbd7514862"
+
+          <a
+            class="music-link"
+            href="https://open.spotify.com/track/44Gn43S8pdWlPgjJVMZsGY?si=b571e0bbd7514862"
             target="_blank"
             rel="noopener"
-            style="color:var(--accent); font-weight:600; margin-top:8px; display:inline-block;">Listen on Spotify →
+          >
+            Listen on Spotify →
           </a>
         </div>
       </div>
 
-      <!-- grid with tour + merch -->
-      <div class="grid" style="margin-top:18px;">
-        <div class="card tour">
-          <h3 style="margin:0 0 8px;">Upcoming / Recent Shows</h3>
+      <!-- GRID -->
+      <div class="grid">
+
+        <!-- TOUR -->
+        <div class="card tour" id="tour">
+          <h3>Upcoming / Recent Shows</h3>
+
           <div class="tour-list" id="tourList">
             <div class="tour-item" data-date="2025-10-30">
               <div><span>30 Okt 2025</span> — Palu, ID</div>
               <div>Posalia KampuLere</div>
             </div>
+
             <div class="tour-item" data-date="2025-11-23">
               <div><span>23 Nov 2025</span> — Palu, ID</div>
               <div>Tanggabanggo</div>
             </div>
+
             <div class="tour-item" data-date="2024-12-01">
               <div><span>01 Des 2024</span> — Makassar</div>
               <div>Venue X</div>
@@ -86,31 +124,55 @@
           </div>
         </div>
 
-        <div class="card">
-          <h3 style="margin:0 0 8px;">Merch</h3>
-          <div style="display:flex; gap:12px; align-items:center;">
-            <img src="" alt="T-shirt" style="width:86px;height:86px;border-radius:10px;background:#1a1a1a" />
-            <div>
-              <div style="font-weight:700">Official T-Shirt</div>
-              <div style="color:var(--muted); margin-top:6px">Rp -</div>
+        <!-- MERCH -->
+        <div class="card merch" id="merch">
+          <h3>Merch</h3>
+
+          <div class="merch-item">
+            <div class="merch-image"></div>
+
+            <div class="merch-meta">
+              <div class="merch-title">Official T-Shirt</div>
+              <div class="merch-price">Rp —</div>
             </div>
           </div>
-          <div style="margin-top:12px;"><a href="#contact" style="color:var(--accent); font-weight:600;">Contact to order</a></div>
+
+          <a class="merch-link" href="#contact">
+            Contact to order
+          </a>
         </div>
+
       </div>
     </section>
 
     <!-- CONTACT -->
-    <section id="contact" class="card" style="margin-top:22px;">
-      <h3 style="margin:0 0 8px;">Contact</h3>
-      <div style="display:flex; flex-direction:column; gap:8px; margin-top:8px;">
-        <a href="mailto:tardigradamusic@gmail.com"><i class="fa-solid fa-envelope"></i> tardigradamusic@gmail.com</a>
-        <a href="https://www.instagram.com/tardigradaofficial/" target="_blank"><i class="fa-brands fa-instagram"></i> @tardigradaofficial</a>
+    <section id="contact" class="card contact">
+      <h3>Contact</h3>
+
+      <div class="contact-list">
+        <a href="mailto:tardigradamusic@gmail.com">
+          <i class="fa-solid fa-envelope"></i>
+          tardigradamusic@gmail.com
+        </a>
+
+        <a
+          href="https://www.instagram.com/tardigradaofficial/"
+          target="_blank"
+          rel="noopener"
+        >
+          <i class="fa-brands fa-instagram"></i>
+          @tardigradaofficial
+        </a>
       </div>
     </section>
 
-    <footer style="margin-top:28px;">© 2025 Tardigrada — All rights reserved.</footer>
+    <!-- FOOTER -->
+    <footer class="footer">
+      © 2025 Tardigrada — All rights reserved.
+    </footer>
+
   </main>
+
   <script src="js/script.js"></script>
 </body>
 </html>
