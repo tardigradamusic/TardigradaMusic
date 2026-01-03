@@ -141,7 +141,7 @@ img{display:block;max-width:100%}
 }
 
 /* ======================================================
-   HERO CONTENT BACKGROUND IMAGE
+   HERO CONTENT BACKGROUND (IMAGE FROM HTML)
 ====================================================== */
 .hero-content{
   position: relative;
@@ -153,35 +153,24 @@ img{display:block;max-width:100%}
       180deg,
       rgba(0,0,0,0.45),
       rgba(0,0,0,0.65)
-    ),
-    url("assets/bahanweb/background.jpg") center / cover no-repeat;
+    );
+
+  background-size: cover;
+  background-position: center;
 
   box-shadow:
     0 30px 80px rgba(0,0,0,.6),
     inset 0 0 0 1px rgba(255,255,255,.08);
 
-  backdrop-filter: blur(2px);
+  transition: background-image 600ms ease;
 }
 
-/* spacing typography inside */
-.hero-content h1{
-  margin-bottom: 12px;
-}
-
-.hero-content p{
-  margin-bottom: 28px;
-}
-
-/* ======================================================
-   RESPONSIVE TWEAK
-====================================================== */
 @media (max-width: 640px){
   .hero-content{
     padding: 36px 24px;
     border-radius: 22px;
   }
 }
-
 /* ======================================================
    HERO — CINEMATIC / FIGMA
 ====================================================== */
