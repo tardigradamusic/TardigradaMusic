@@ -135,3 +135,19 @@
     document.documentElement.classList.add('reduce-motion');
   }
 })();
+
+/* ===============================
+   HERO BACKGROUND FROM HTML
+=============================== */
+document.querySelectorAll('[data-background]').forEach(el => {
+  const bg = el.getAttribute('data-background');
+  if (bg) {
+    el.style.backgroundImage =
+      `linear-gradient(
+        180deg,
+        rgba(0,0,0,0.45),
+        rgba(0,0,0,0.65)
+      ), url("${bg}")`;
+  }
+});
+
