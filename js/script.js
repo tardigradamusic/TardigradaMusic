@@ -1,61 +1,137 @@
-(function () {
+(() => {
+  /* ===============================
+     UTILITIES
+  =============================== */
   const $ = s => document.querySelector(s);
   const $$ = s => Array.from(document.querySelectorAll(s));
-  
+
+  /* ===============================
+     HEADER / DRAWER (iOS FEEL)
+  =============================== */
   const navToggle = $('#navToggle');
   const drawer = $('#drawer');
-  navToggle && navToggle.addEventListener('click', () => {
-    const open = drawer.classList.toggle('open');
-    drawer.setAttribute('aria-hidden', String(!open));
+  const body = document.body;
+
+  const openDrawer = () => {
+    drawer.classList.add('open');
+    drawer.setAttribute('aria-hidden', 'false');
+    body.style.overflow = 'hidden';
+  };
+
+  const closeDrawer = () => {
+    drawer.classList.remove('open');
+    drawer.setAttribute('aria-hidden', 'true');
+    body.style.overflow = '';
+  };
+
+  navToggle?.addEventListener('click', () => {
+    drawer.classList.contains('open') ? closeDrawer() : openDrawer();
   });
-  drawer && drawer.addEventListener('click', e => { if (e.target.tagName === 'A') drawer.classList.remove('open'); });
-  
-  const header = document.querySelector('.header');
-  const headerHeight = () => header ? header.offsetHeight : 56;
-  $$('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', (ev) => {
-      const href = a.getAttribute('href');
-      if (!href.startsWith('#')) return;
-      const target = document.querySelector(href);
+
+  drawer?.addEventListener('click', e => {
+    if (e.target.tagName === 'A') closeDrawer();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeDrawer();
+  });
+
+  document.addEventListener('click', e => {
+    if (
+      drawer.classList.contains('open') &&
+      !drawer.contains(e.target) &&
+      !navToggle.contains(e.target)
+    ) {
+      closeDrawer();
+    }
+  });
+
+  /* ===============================
+     SMOOTH SCROLL (OFFSET HEADER)
+  =============================== */
+  const header = $('.header');
+  const headerOffset = () => header?.offsetHeight || 64;
+
+  $$('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const id = link.getAttribute('href');
+      const target = $(id);
       if (!target) return;
-      ev.preventDefault();
-      const top = target.getBoundingClientRect().top + window.scrollY - headerHeight();
-      window.scrollTo({ top, behavior: 'smooth' });
+
+      e.preventDefault();
+      const y =
+        target.getBoundingClientRect().top +
+        window.scrollY -
+        headerOffset();
+
+      window.scrollTo({ top: y, behavior: 'smooth' });
     });
   });
 
-    /* Hero reveal (subtle) */
-    const hero = document.querySelector('.hero');
-    window.addEventListener('load', () => { hero && setTimeout(() => hero.classList.add('visible'), 260); });
+  /* ===============================
+     HERO REVEAL (ON LOAD)
+  =============================== */
+  window.addEventListener('load', () => {
+    const hero = $('.hero');
+    hero && hero.classList.add('visible');
+  });
 
-    /* Theme toggle (persist) */
-    const themeBtn = $('#themeBtn');
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    if (savedTheme === 'light') document.body.classList.add('light');
-    themeBtn && themeBtn.addEventListener('click', () => {
-      const isLight = document.body.classList.toggle('light');
-      if (!isLight) document.body.classList.remove('light');
-      localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    });
+  /* ===============================
+     SCROLL REVEAL — APPLE STYLE
+     (IntersectionObserver)
+  =============================== */
+  const revealEls = $$('.music-card, .card, .grid, .hero-content');
 
-    /* Fade-in on scroll */
-    const fades = $$('.hero-content, .music-card, .card, .grid');
-    const reveal = () => {
-      const th = window.innerHeight - 120;
-      fades.forEach(el => { if (el.getBoundingClientRect().top < th) el.classList.add('visible'); });
-    };
-    window.addEventListener('scroll', reveal, { passive:true });
-    window.addEventListener('resize', reveal);
-    reveal();
+  const revealObserver = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.12,
+      rootMargin: '0px 0px -80px 0px'
+    }
+  );
 
-    /* Tour: mark past dates */
-    $$('.tour-item').forEach(item => {
-      const ds = item.dataset.date;
-      if (!ds) return;
-      const eventDate = new Date(ds + 'T23:59:59');
-      if (eventDate < new Date()) item.classList.add('past');
-    });
+  revealEls.forEach(el => revealObserver.observe(el));
 
-    /* Accessibility: ESC closes drawer */
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') drawer && drawer.classList.remove('open'); });
-  })();
+  /* ===============================
+     THEME TOGGLE (PERSIST)
+  =============================== */
+  const themeBtn = $('#themeBtn');
+  const savedTheme = localStorage.getItem('theme');
+
+  if (savedTheme === 'light') body.classList.add('light');
+
+  themeBtn?.addEventListener('click', () => {
+    body.classList.toggle('light');
+    localStorage.setItem(
+      'theme',
+      body.classList.contains('light') ? 'light' : 'dark'
+    );
+  });
+
+  /* ===============================
+     TOUR DATE AUTO STATUS
+  =============================== */
+  $$('.tour-item').forEach(item => {
+    const date = item.dataset.date;
+    if (!date) return;
+
+    const eventDate = new Date(`${date}T23:59:59`);
+    if (eventDate < new Date()) {
+      item.classList.add('past');
+    }
+  });
+
+  /* ===============================
+     REDUCED MOTION SUPPORT
+  =============================== */
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('reduce-motion');
+  }
+})();
