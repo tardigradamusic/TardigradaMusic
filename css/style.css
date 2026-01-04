@@ -236,3 +236,15 @@ body {
     height: 22px;
   }
 }
+
+/* Fade-in animation */
+.fade {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .8s ease, transform .8s ease;
+}
+
+.fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
