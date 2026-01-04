@@ -142,3 +142,97 @@ body {
   .nav { display:none; }
   .header { justify-content:center; }
 }
+
+/* ================= ARTWORK HOVER PLAYER ================= */
+
+.release {
+  text-align: center;
+}
+
+.artwork {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.25);
+}
+
+.artwork img {
+  width: 100%;
+  display: block;
+  transition: transform .6s ease, filter .6s ease;
+}
+
+/* Overlay */
+.artwork-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  backdrop-filter: blur(14px);
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: opacity .45s ease;
+}
+
+/* Text */
+.listen-text {
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: .18em;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+/* Platform icons */
+.platforms {
+  display: flex;
+  gap: 20px;
+}
+
+.platforms a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.platforms img {
+  width: 26px;
+  height: 26px;
+  opacity: .85;
+  transition: transform .25s ease, opacity .25s ease;
+}
+
+.platforms a:hover img {
+  transform: scale(1.18);
+  opacity: 1;
+}
+
+/* Hover effect */
+.artwork:hover img {
+  filter: blur(6px) brightness(.7);
+  transform: scale(1.06);
+}
+
+.artwork:hover .artwork-overlay {
+  opacity: 1;
+}
+
+/* Mobile tap support */
+.artwork.active .artwork-overlay {
+  opacity: 1;
+}
+
+.artwork.active img {
+  filter: blur(6px) brightness(.7);
+  transform: scale(1.06);
+}
+
+/* Responsive tweak */
+@media (max-width:768px) {
+  .platforms img {
+    width: 22px;
+    height: 22px;
+  }
+}
