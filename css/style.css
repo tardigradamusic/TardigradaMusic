@@ -1,10 +1,9 @@
-/* RESET */
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
-  color: #fff;
+  color: #111; /* HITAM */
   background-image: url('../assets/bahanweb/backgroundutama.jpg');
   background-size: cover;
   background-position: center;
@@ -116,7 +115,7 @@ body {
 
 .release img {
   width:100%;
-  border-radius:18px;
+  border-radius: 0;
   margin-bottom:12px;
 }
 
@@ -185,6 +184,18 @@ body {
   border-radius: 0;
   box-shadow: none;
 }
+
+/* REMOVE RELEASE BOX */
+.release .artwork-overlay {
+  display: none;
+}
+
+.release .artwork:hover img,
+.release .artwork.active img {
+  filter: none;
+  transform: none;
+}
+
 
 .artwork img {
   width: 100%;
@@ -288,4 +299,17 @@ body {
 .fade.visible {
   opacity: 1;
   transform: translateY(0);
+}
+/* FINAL: NO BOX / NO HOVER EFFECT ON RELEASE */
+.release .artwork:hover img,
+.release .artwork.active img {
+  filter: none !important;
+  transform: none !important;
+}
+
+.release .artwork-overlay {
+  display: none !important;
+}
+.release .artwork {
+  position: static;
 }
