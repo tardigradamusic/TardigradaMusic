@@ -114,12 +114,12 @@ body {
 }
 
 .release img {
-  width:100%;
-  border-radius: 0;
-  margin-bottom:12px;
+  width: 100%;
+  display: block;
 }
 
 .release h3 {
+  margin-top: 12px;
   font-size:16px;
   font-weight:600;
 }
@@ -181,21 +181,11 @@ body {
 }
 
 .artwork {
+  position: relative;   /* WAJIB */
+  overflow: hidden;     /* agar blur tidak keluar */
   border-radius: 0;
   box-shadow: none;
 }
-
-/* REMOVE RELEASE BOX */
-.release .artwork-overlay {
-  display: none;
-}
-
-.release .artwork:hover img,
-.release .artwork.active img {
-  filter: none;
-  transform: none;
-}
-
 
 .artwork img {
   width: 100%;
@@ -215,6 +205,11 @@ body {
   justify-content: center;
   align-items: center;
   transition: opacity .45s ease;
+  pointer-events: none; /* penting */
+}
+
+.platforms a {
+  pointer-events: auto; /* icon bisa diklik */
 }
 
 /* Text */
@@ -299,17 +294,4 @@ body {
 .fade.visible {
   opacity: 1;
   transform: translateY(0);
-}
-/* FINAL: NO BOX / NO HOVER EFFECT ON RELEASE */
-.release .artwork:hover img,
-.release .artwork.active img {
-  filter: none !important;
-  transform: none !important;
-}
-
-.release .artwork-overlay {
-  display: none !important;
-}
-.release .artwork {
-  position: static;
 }
