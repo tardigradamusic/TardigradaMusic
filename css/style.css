@@ -4,8 +4,12 @@ html { scroll-behavior:smooth; }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
-  background:#fff;
-  color:#111;
+  color: #fff;
+  background-image: url('../assets/bahanweb/backgroundutama.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 /* HEADER */
@@ -82,6 +86,10 @@ body {
   max-width:1100px;
   margin:auto;
   text-align:center;
+
+  background: rgba(0,0,0,.35);
+  backdrop-filter: blur(8px);
+  border-radius: 24px;
 }
 
 .section h2 {
@@ -134,8 +142,9 @@ body {
   padding: 48px 24px;
   text-align: center;
   font-size: 13px;
-  color: #777;
-  background: #fff;
+  color: #ddd;
+  background: rgba(0,0,0,.4);
+  backdrop-filter: blur(10px);
 }
 
 /* FOOTER SOCIAL ICONS */
