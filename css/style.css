@@ -1,14 +1,39 @@
+@font-face {
+  font-family: 'Yuzarsif';
+  src: url('../assets/fonts/Yuzarsif.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
-  color: #111; /* HITAM */
+  font-family: 'Yuzarsif', 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  color: #111;
   background-image: url('../assets/bahanweb/backgroundutama2.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+}
+
+h1, h2, h3,
+.hero p,
+.nav a,
+.cta,
+.listen-text {
+  font-family: 'Yuzarsif', sans-serif;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+/* Teks panjang / readability */
+p, span, .list div {
+  font-family: 'Inter', system-ui, sans-serif;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 /* HEADER */
