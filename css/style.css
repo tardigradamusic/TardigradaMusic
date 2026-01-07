@@ -24,6 +24,17 @@ body {
   backdrop-filter:blur(20px);
 }
 
+.brand img {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+
+.hero-logo img {
+  width: min(320px, 70vw);
+  height: auto;
+}
+
 .nav a {
   margin-left:24px;
   text-decoration:none;
@@ -242,16 +253,6 @@ body {
 
 .platforms a:hover img {
   transform: scale(1.18);
-  opacity: 1;
-}
-
-/* Hover effect */
-.artwork:hover img {
-  filter: blur(6px) brightness(.7);
-  transform: scale(1.06);
-}
-
-.artwork:hover .artwork-overlay {
   opacity: 1;
 }
 
