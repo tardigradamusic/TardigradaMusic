@@ -1,23 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
   const artworks = document.querySelectorAll(".artwork");
 
-  // Helper: tutup semua artwork
-  function closeAllArtworks() {
-    artworks.forEach(a => a.classList.remove("is-active"));
+  // Tutup semua artwork
+  function closeAll() {
+    artworks.forEach(a => a.classList.remove("active"));
   }
 
   artworks.forEach(artwork => {
     artwork.addEventListener("click", (e) => {
-      // Jika klik pada link platform, biarkan normal
-      if (e.target.closest("a")) return;
+      // Jika klik pada icon platform → JANGAN toggle
+      if (e.target.closest(".platforms a")) return;
 
-      // Toggle artwork yang diklik
-      const isActive = artwork.classList.contains("is-active");
+      const isActive = artwork.classList.contains("active");
 
-      closeAllArtworks();
+      closeAll();
 
       if (!isActive) {
-        artwork.classList.add("is-active");
+        artwork.classList.add("active");
       }
     });
   });
@@ -25,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Klik di luar artwork → tutup semua
   document.addEventListener("click", (e) => {
     if (!e.target.closest(".artwork")) {
-      closeAllArtworks();
+      closeAll();
     }
   });
 });
