@@ -198,9 +198,7 @@ h1, h2,
 
 /* HERO */
 .hero {
-  height:100vh;
-  background-size:cover;
-  background-position:center;
+  min-height: 100svh;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -560,3 +558,13 @@ h1, h2,
     height: 18px;
   }
 }
+
+@media (max-width: 768px) {
+  body {
+    background-size: contain;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-color: #000;
+  }
+}
+
