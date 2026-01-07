@@ -33,6 +33,46 @@ body {
 .hero-logo img {
   width: min(320px, 70vw);
   height: auto;
+
+  filter:
+    brightness(0)
+    invert(95%)
+    sepia(10%)
+    saturate(220%)
+    hue-rotate(180deg)
+    drop-shadow(0 0 18px rgba(180,255,255,.35));
+
+  opacity: .95;
+}
+
+.hero-logo {
+  display: inline-flex;
+  padding: 30px 44px;
+  border-radius: 30px;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,.12),
+    rgba(255,255,255,.04)
+  );
+  backdrop-filter: blur(22px) saturate(150%);
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
+  box-shadow:
+    0 30px 60px rgba(0,0,0,.5),
+    inset 0 0 0 1px rgba(255,255,255,.18);
+  margin-bottom: 32px;
+
+  /* tambahkan ini */
+  animation: heroFloat 6s ease-in-out infinite;
+}
+
+/* letakkan di bawahnya */
+@keyframes heroFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 .nav a {
@@ -196,17 +236,30 @@ body {
   overflow: hidden;     /* agar blur tidak keluar */
   border-radius: 0;
   box-shadow: none;
+  cursor: pointer;
 }
 
-.artwork img {
+.artwork-img {
+  position: relative;
   width: 100%;
+  z-index: 1;
   display: block;
   transition: transform .6s ease, filter .6s ease;
+}
+
+.artwork.active .artwork-img {
+  filter: blur(6px) brightness(.7);
+  transform: scale(1.06);
+}
+
+.artwork.active .platforms img {
+  filter: drop-shadow(0 0 6px rgba(255,255,255,.35));
 }
 
 /* Overlay */
 .artwork-overlay {
   position: absolute;
+  z-index: 2;
   inset: 0;
   background: rgba(0,0,0,.45);
   backdrop-filter: blur(14px);
@@ -215,7 +268,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: opacity .45s ease;
+  transition: opacity .35s ease;
   pointer-events: none; /* penting */
 }
 
@@ -261,11 +314,6 @@ body {
   opacity: 1;
 }
 
-.artwork.active img {
-  filter: blur(6px) brightness(.7);
-  transform: scale(1.06);
-}
-
 @media (max-width:768px) {
   .nav { display:none; }
   .header { justify-content:center; }
@@ -284,6 +332,19 @@ body {
     height: 20px;
   }
 }
+
+/* Desktop hover support */
+@media (hover: hover) {
+  .artwork:hover .artwork-img {
+    filter: blur(6px) brightness(.7);
+    transform: scale(1.06);
+  }
+
+  .artwork:hover .artwork-overlay {
+    opacity: 1;
+  }
+}
+
 
 /* Fade-in animation */
 .fade {
