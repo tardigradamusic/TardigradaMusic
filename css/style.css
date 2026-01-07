@@ -424,26 +424,6 @@ h1, h2,
   opacity: 1;
 }
 
-@media (max-width:768px) {
-  .nav { display:none; }
-  .header { justify-content:center; }
-
-  .platforms img {
-    width: 22px;
-    height: 22px;
-  }
-
-  .footer-social {
-    gap: 16px;
-  }
-
-  .footer-social img {
-    width: 20px;
-    height: 20px;
-  }
-}
-
-/* Desktop hover support */
 @media (hover: hover) {
   .artwork:hover .artwork-img {
     filter: blur(6px) brightness(.7);
@@ -455,8 +435,6 @@ h1, h2,
   }
 }
 
-
-/* Fade-in animation */
 .fade {
   opacity: 0;
   transform: translateY(24px);
@@ -471,17 +449,16 @@ h1, h2,
 @media (max-width: 768px) {
   body {
     background-attachment: scroll;
+    background-size: contain;
     background-position: center top;
+    background-repeat: no-repeat;
+    background-color: #000;
   }
   .header {
     justify-content: center;
     padding: 16px 24px;
   }
-  .nav {
-    display: none;
-  }
   .header,
-  .nav a,
   h1, h2,
   .listen-text {
     letter-spacing: .12em;
@@ -492,7 +469,6 @@ h1, h2,
   .hero {
     min-height: 100svh;
     height: auto;
-    background-position: center top;
   }
   .hero p {
     font-size: 16px;
@@ -558,13 +534,3 @@ h1, h2,
     height: 18px;
   }
 }
-
-@media (max-width: 768px) {
-  body {
-    background-size: contain;
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-color: #000;
-  }
-}
-
