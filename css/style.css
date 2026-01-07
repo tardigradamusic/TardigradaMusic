@@ -18,7 +18,7 @@
 html { scroll-behavior:smooth; }
 
 body {
-  font-family: 'Yuzarsif', 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-family: 'Moglan', system-ui, sans-serif;
   color: #111;
   background-image: url('../assets/bahanweb/backgroundutama2.jpg');
   background-size: cover;
@@ -27,19 +27,31 @@ body {
   background-attachment: fixed;
 }
 
-h1, h2, h3,
-.hero p,
+.header,
 .nav a,
-.cta,
+h1, h2,
 .listen-text {
   font-family: 'Yuzarsif', sans-serif;
   letter-spacing: .18em;
   text-transform: uppercase;
 }
 
-/* Teks panjang / readability */
-p, span, .list div {
-  font-family: 'Inter', system-ui, sans-serif;
+/* Judul lagu */
+.release h3 {
+  font-family: 'Yuzarsif', sans-serif;
+  letter-spacing: .08em;
+  text-transform: none;
+}
+
+/* Teks isi / deskripsi */
+.hero p,
+.section p,
+.release span,
+.list div,
+.footer,
+.cta,
+.link {
+  font-family: 'Moglan', system-ui, sans-serif;
   letter-spacing: normal;
   text-transform: none;
 }
