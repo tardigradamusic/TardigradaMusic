@@ -46,22 +46,8 @@ body {
 }
 
 .hero-logo {
-  display: inline-flex;
-  padding: 30px 44px;
-  border-radius: 30px;
-  background: linear-gradient(
-    135deg,
-    rgba(255,255,255,.12),
-    rgba(255,255,255,.04)
-  );
-  backdrop-filter: blur(22px) saturate(150%);
-  -webkit-backdrop-filter: blur(22px) saturate(150%);
-  box-shadow:
-    0 30px 60px rgba(0,0,0,.5),
-    inset 0 0 0 1px rgba(255,255,255,.18);
+  display: inline-block;
   margin-bottom: 32px;
-
-  /* tambahkan ini */
   animation: heroFloat 6s ease-in-out infinite;
 }
 
