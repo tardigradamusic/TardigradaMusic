@@ -471,62 +471,53 @@ h1, h2,
 }
 
 @media (max-width: 768px) {
-
-  /* HEADER */
+  body {
+    background-attachment: scroll;
+    background-position: center top;
+  }
   .header {
     justify-content: center;
     padding: 16px 24px;
   }
-
   .nav {
     display: none;
   }
-
-  /* FONT */
   .header,
   .nav a,
   h1, h2,
   .listen-text {
     letter-spacing: .12em;
   }
-
   .release h3 {
     letter-spacing: .04em;
   }
-
-  /* HERO */
+  .hero {
+    min-height: 100svh;
+    height: auto;
+    background-position: center top;
+  }
   .hero p {
     font-size: 16px;
     line-height: 1.6;
   }
-
-  /* SECTION */
   .section {
     padding: 80px 20px;
   }
-
-  /* RELEASE GRID */
   .release-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
-
-  /* LIST */
   .list div {
     font-size: 14px;
     line-height: 1.6;
   }
-
-  /* ICONS */
   .platforms img {
     width: 22px;
     height: 22px;
   }
-
   .footer-social {
     gap: 16px;
   }
-
   .footer-social img {
     width: 20px;
     height: 20px;
