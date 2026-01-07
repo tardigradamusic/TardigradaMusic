@@ -15,19 +15,120 @@ body {
 .header {
   position:fixed;
   top:0;
-  width:100%;
-  z-index:100;
-  display:flex;
-  justify-content:space-between;
-  padding:18px 40px;
-  background:rgba(255,255,255,.75);
-  backdrop-filter:blur(20px);
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 42px;
+  
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,.85),
+      rgba(255,255,255,.55)
+    );
+  
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+
+  border-bottom: 1px solid rgba(255,255,255,.35);
+  box-shadow:
+    0 10px 40px rgba(0,0,0,.12),
+    inset 0 -1px 0 rgba(255,255,255,.25);
+
+  transition: padding .4s ease, box-shadow .4s ease;
+}
+
+.header::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,.02) 0px,
+      rgba(255,255,255,.02) 1px,
+      transparent 2px,
+      transparent 4px
+    );
+  mix-blend-mode: overlay;
 }
 
 .brand img {
-  height: 28px;
+  height: 30px;
   width: auto;
   display: block;
+  filter:
+    drop-shadow(0 0 8px rgba(160,255,255,.25));
+  transition: transform .35s ease, filter .35s ease;
+}
+
+.brand:hover img {
+  transform: scale(1.04);
+  filter:
+    drop-shadow(0 0 14px rgba(160,255,255,.55));
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav a {
+  position: relative;
+  margin-left: 28px;
+  text-decoration: none;
+
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+
+  color: #444;
+  opacity: .85;
+  transition: color .3s ease, opacity .3s ease;
+}
+
+.nav a::after {
+  content:"";
+  position:absolute;
+  left: 50%;
+  bottom: -8px;
+  width: 0;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #9ffcff,
+      transparent
+    );
+
+  transform: translateX(-50%);
+  transition: width .35s ease;
+}
+
+.nav a:hover {
+  color: #000;
+  opacity: 1;
+}
+
+.nav a:hover::after {
+  width: 100%;
+}
+
+@media (max-width:768px) {
+  .header {
+    justify-content: center;
+    padding: 16px 24px;
+  }
+
+  .nav {
+    display: none;
+  }
 }
 
 .hero-logo img {
@@ -60,15 +161,6 @@ body {
     transform: translateY(-8px);
   }
 }
-
-.nav a {
-  margin-left:24px;
-  text-decoration:none;
-  color:#555;
-  font-size:14px;
-}
-
-.nav a:hover { color:#000; }
 
 /* HERO */
 .hero {
