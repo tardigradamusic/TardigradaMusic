@@ -166,7 +166,8 @@ h1, h2,
 }
 
 .hero-logo img {
-  width: min(320px, 70vw);
+  width: clamp(360px, 40vw, 560px); /* 🔥 LEBIH BESAR */
+  max-width: 90vw;
   height: auto;
 
   filter:
@@ -175,9 +176,9 @@ h1, h2,
     sepia(10%)
     saturate(220%)
     hue-rotate(180deg)
-    drop-shadow(0 0 18px rgba(180,255,255,.35));
+    drop-shadow(0 0 26px rgba(180,255,255,.45));
 
-  opacity: .95;
+  opacity: .98;
 }
 
 .hero-logo {
@@ -210,7 +211,12 @@ h1, h2,
 .overlay {
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,.35);
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(0,0,0,.25),
+      rgba(0,0,0,.55)
+    );
 }
 
 .hero-content {
@@ -219,6 +225,8 @@ h1, h2,
   color:#fff;
   max-width:640px;
   padding:24px;
+
+  transform: translateY(-24px);
 }
 
 .hero h1 {
@@ -497,6 +505,13 @@ h1, h2,
   .footer-social img {
     width: 20px;
     height: 20px;
+  }
+  .hero-content {
+    transform: translateY(-16px);
+  }
+
+  .hero-logo img {
+    width: clamp(260px, 72vw, 340px);
   }
 }
 
